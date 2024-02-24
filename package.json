@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.4",
+    "webpack": "^5.90.0"
+  },
+  "name": "galleryphoto-app",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "Furkon Saliz",
+  "license": "ISC",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.12",
+    "vite-plugin-laravel": "^0.3.1",
+    "windicss": "^3.5.6"
+  }
+}
