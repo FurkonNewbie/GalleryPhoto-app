@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/output.css') }}" rel="stylesheet">
+    <link rel="website icon" type="img/png" href="{{ asset('assets/gf.jpg') }}">
     <style>
         .blur-backdrop-filter {
             backdrop-filter: blur(5px);
@@ -45,20 +46,6 @@
             </div>
         </div>
     </nav>
-    <!-- <div
-      class="container text-5xl max-w-screen-xl items-center mx-auto p-4 mt-32 px-6"
-    >
-      <div class="w-full lg:w-1/2">
-        <div class="">Selamat datang</div>
-        <div class="">Di Website GalleryFoto</div>
-      </div>
-
-      <div class="w-full self-center lg:w-1/2">
-        <img class="w-52 h-52" src="/dist/img/skeleton.jpg" alt="" />
-      </div>
-    </div> -->
-
-    <!--section-->
     <section class="pt-44 lg:pt-20">
         <div class="container mx-auto max-w-screen-xl">
             <div class="flex flex-wrap">
@@ -77,29 +64,32 @@
             </div>
         </div>
     </section>
-    <div class="bg-ijobrown w-full h-auto lg:h-[500px]  mt-12 pb-2">
-        <div class="font-bold text-2xl mx-auto items-center flex justify-center pt-10">
-            Saatnya ber explore!
+    <div class="bg-ijobrown w-full h-auto   mt-12 pb-2">
+        <div class="font-bold text-3xl mx-auto items-center flex justify-center pt-10 mb-10">
+            Saatnya Ber Explore!
         </div>
-        <div class="max-w-screen-2xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-5 pt-14">
-
-            <div class="bg-green-300  h-64 w-96">
-                <div class="text-center mt-2">
-                    <img src="{{ asset('assets/bg_01.png') }}" alt="">
-                </div>
-            </div>
-            <div class="bg-green-300 h-64 w-96">
-                <div class="text-center mt-2">
-                    deskripsi
-                </div>
-            </div>
-            <div class="bg-green-300 h-64 w-96">
-                <div class="text-center mt-2">
-                    deskripsi
-                </div>
-            </div>
+        <div class="max-w-screen-md mx-auto columns-1 lg:columns-3 gap-4 mb-20">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.13_efd704b0.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 21.04.38_c1a7a510.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.13_7e01e1c6.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 21.04.37_c839ae0d.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.14_0560d45f.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.14_56afdab0.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 21.04.37_a226b155.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.14_cddbd43c.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 21.04.37_3aaf9436.jpg" alt="">
+            <img class="mb-5 " src="/assets/WhatsApp Image 2024-02-24 at 16.37.15_40e99e1e.jpg" alt="">
 
         </div>
+    </div>
+
+    <div class="bg-black p-5 flex flex-col justify-center items-center text-center">
+        <p class="text-xl font bold text-white mb-1">
+            GalleryPhoto
+        </p>
+        <span class="text-white text-xs">
+            Copyright © 2024 GalleryPhoto. All rights reserved.
+        </span>
     </div>
     <!--end section-->
     {{-- <script src="/dist/js/script.js"></script> --}}

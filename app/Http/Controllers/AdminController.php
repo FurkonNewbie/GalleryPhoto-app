@@ -38,8 +38,39 @@ class AdminController extends Controller
     //fungsi hapus akun
     public function hapus_account(Request $request, $id)
     {
-        $report = User::findOrFail($id);
-        $report->delete();
-        return redirect('/hapus_akun')->with('success', 'hapus akun berhasil');
+        $user = User::findOrFail($id);
+
+        // Hapus rekaman terkait dari tabel report
+        $user->report()->delete();
+
+        // Hapus rekaman terkait dari tabel album dan foto
+        foreach ($user->album as $album) {
+            foreach ($album->foto as $foto) {
+                // Hapus rekaman di tabel report yang terkait dengan foto
+                $foto->report()->delete();
+
+                // Hapus rekaman di tabel comment yang terkait dengan foto
+                $foto->comment()->delete();
+
+                // Hapus rekaman di tabel like yang terkait dengan foto
+                $foto->like()->delete();
+
+                // Hapus rekaman di tabel foto
+                $foto->delete();
+            }
+            $album->delete();
+        }
+
+        // Hapus rekaman terkait dari tabel like dan comment
+        $user->like()->delete();
+        $user->comment()->delete();
+
+        // Hapus rekaman terkait dari tabel foto
+        $user->foto()->delete();
+
+        // Hapus pengguna
+        $user->delete();
+
+        return redirect('/hapus_akun')->with('success', 'Hapus akun berhasil');
     }
 }

@@ -38,6 +38,8 @@ function ikuti(txt, id) {
     });
 }
 
+
+//menampilkan postingan user lain
 var paginate = 1;
 var dataIndex = [];
 loadMoreData(paginate);

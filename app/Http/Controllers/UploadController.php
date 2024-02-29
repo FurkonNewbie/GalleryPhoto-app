@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\album;
 use App\Models\foto;
+use App\Models\like;
+use App\Models\album;
+use App\Models\comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UploadController extends Controller
 {
@@ -20,7 +23,6 @@ class UploadController extends Controller
         // Validasi tipe mime file
         $request->validate([
             'fileFoto' => 'image|mimes:jpeg,png|max:2048',
-            // ... (Tambahkan validasi lainnya jika diperlukan)
         ]);
 
         // Logika penyimpanan foto sesuai kebutuhan Anda
@@ -55,8 +57,6 @@ class UploadController extends Controller
             album::create($dataalbum);
         }
 
-        // Logika lainnya sesuai kebutuhan Anda
-
         // Ambil ulang data album
         $albums = album::all();
 
@@ -69,17 +69,36 @@ class UploadController extends Controller
     }
     public function destroyFoto(Request $request, foto $foto)
     {
-        // Ensure the user can only delete their own photos
+
         if ($foto->user_id != auth()->user()->id) {
-            return back()->with('error', 'Unauthorized to delete this photo.');
+            return back()->with('error', 'Tidak diizinkan menghapus foto ini.');
         }
 
-        // Optionally, you might want to perform additional checks before deleting.
 
-        // Perform the deletion
-        $foto->delete();
 
-        return back()->with('success', 'Photo deleted successfully.');
+        // Lakukan penghapusan
+        try {
+            // Mulai transaksi database
+            DB::beginTransaction();
+
+            // Hapus data like terkait
+            like::where('foto_id', $foto->id)->delete();
+
+            // Hapus data komen
+            comment::where('foto_id', $foto->id)->delete();
+
+            // Hapus data foto dari database
+            $foto->delete();
+
+            // Commit transaksi jika semua operasi di atas berhasil
+            DB::commit();
+
+            return back()->with('success', 'Foto berhasil dihapus.');
+        } catch (\Exception $e) {
+            // Jika terjadi exception, rollback transaksi
+            DB::rollback();
+            return back()->with('error', 'Error saat menghapus foto: ' . $e->getMessage());
+        }
     }
 
     public function edit_upload($id)

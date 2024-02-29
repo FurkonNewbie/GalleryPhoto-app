@@ -97,17 +97,11 @@ Route::middleware('user')->group(function () {
     Route::post('up_password', [ProfileController::class, 'up_password'])->name('up_password');
     //end password
 
+
     //upload and album
     Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
 
-    //edit upload foto
-    // Route::get('/edit_upload/{foto}/edit', [UploadController::class, 'edit_upload'])->name('edit_upload');
-    // Route::put('/photos/{foto}', [UploadController::class, 'updateFoto'])->name('photos.edit');
 
-
-
-    // Route::get('/uploaded', [UploadController::class, 'uploaded'])->name('uploaded');
-    // Define the route for editing a photo
     // Display the edit form
     Route::get('/edit_upload/{foto}/edit', [UploadController::class, 'edit_upload'])->name('edit_upload.edit');
 
@@ -147,8 +141,7 @@ Route::middleware('user')->group(function () {
 Route::middleware('admin')->group(function () {
     //tampil hal dashboard admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    //tampil hapus report
-    Route::get('/hapus_report', [AdminController::class, 'hapus_report'])->name('hapus_report');
+
     //tampil hapus akun
     Route::get('/hapus_akun', [AdminController::class, 'hapus_akun'])->name('hapus_akun');
     //tampil profile admin
@@ -165,4 +158,7 @@ Route::middleware('admin')->group(function () {
     //delete foto report
     // web.php
     Route::delete('/report/{id}', [ReportController::class, 'destroy'])->name('report.destroy');
+
+    //tampil hapus report
+    Route::get('/hapus_report', [AdminController::class, 'hapus_report'])->name('hapus_report');
 });

@@ -43,36 +43,7 @@ class UserController extends Controller
             'userId'     => auth()->user()->id
         ]);
     }
-    // public function getdatadetail(Request $request, $id)
-    // {
-    //     $dataDetailFoto = foto::with('user')->where('id', $id)->firstOrFail();
-    //     $dataFollow = follow::where('follow_id', $dataDetailFoto->user->id)->where('user_id', auth()->user()->id)->first();
-
-
-    //     return response()->json([
-    //         'dataDetailFoto'    => $dataDetailFoto,
-    //         'dataUser' => auth()->user()->id,
-    //         'dataFollow' => $dataFollow
-    //     ], 200);
-    // }
-
-    // var idUser;
-    // if (res.dataFollow == null) {
-    //     idUser = ""
-    // } else {
-    //     idUser = res.dataFollow.user_id
-    // }
-
-    // if (res.dataDetailFoto.user_id === res.dataUser) {
-    //     $('#tombolfollow').html('')
-    // } else {
-    //     if (idUser == res.dataUser) {
-    //         $('#tombolfollow').html(' <button class="hover:bg-green-100 rounded-sm px-2" onclick="ikuti(this,' + res.dataDetailFoto.user_id + ')"> mengikuti </button> ')
-    //     } else {
-    //         $('#tombolfollow').html(' <button class="hover:bg-green-100 rounded-sm px-2" onclick="ikuti(this,' + res.dataDetailFoto.user_id + ')"> + ikuti </button> ')
-
-    //     }
-    // }
+    //fungsi tombol like
     public function like(Request $request)
     {
         try {

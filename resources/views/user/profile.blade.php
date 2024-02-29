@@ -18,7 +18,7 @@
                 <button data-modal-target="progress-modal" data-modal-toggle="progress-modal"
                     class="blockfocus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center "
                     type="button" id="followers">
-                    Followers
+                    {{ $userFollowers }} Followers
                 </button>
 
                 <!-- Main modal -->
@@ -130,8 +130,9 @@
                 <button data-modal-target="following-modal" data-modal-toggle="following-modal"
                     class="blockfocus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center "
                     type="button" id="following">
-                    Following
+                    {{ $dataFollowCount }} Following
                 </button>
+
 
                 <!-- Main modal -->
                 <div id="following-modal" tabindex="-1" aria-hidden="true"
@@ -153,30 +154,30 @@
 
                                 <h3>Following</h3>
                                 <hr class="mx-auto w-11/12 border-t border-gray-300 my-2">
-                                <div class="flex flex-col overflow-y-auto  h-[250px]  scrollbar-hidden   
+                                <div class="flex flex-col overflow-y-auto  h-[250px]  scrollbar-hidden
                                         </div>
                                     </div>
-                                    <div class="flex justify-between w-full my-2">
-                                        <div class="flex items-center">
-                                            <img src="/assets/kocheng.jpg" class="w-10 h-10 rounded-full" alt="">
-                                            <p class="text-sm font-bold ml-2">furkon saliz</p>
-                                        </div>
-                                        <div>
-                                            <button class="hover:bg-green-100 rounded px-2">
-                                                + follow
-                                            </button>
-                                        </div>
+                                    <div class="flex
+                                    justify-between w-full my-2">
+                                    <div class="flex items-center">
+                                        <img src="/assets/kocheng.jpg" class="w-10 h-10 rounded-full" alt="">
+                                        <p class="text-sm font-bold ml-2">furkon saliz</p>
                                     </div>
-                                    <div class="flex justify-between w-full my-2">
-                                        <div class="flex items-center">
-                                            <img src="/assets/kocheng.jpg" class="w-10 h-10 rounded-full" alt="">
-                                            <p class="text-sm font-bold ml-2">furkon saliz</p>
-                                        </div>
-                                        <div>
-                                            <button class="hover:bg-green-100 rounded px-2">
-                                                + follow
-                                            </button>
-                                        </div>
+                                    <div>
+                                        <button class="hover:bg-green-100 rounded px-2">
+                                            + follow
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between w-full my-2">
+                                    <div class="flex items-center">
+                                        <img src="/assets/kocheng.jpg" class="w-10 h-10 rounded-full" alt="">
+                                        <p class="text-sm font-bold ml-2">furkon saliz</p>
+                                    </div>
+                                    <div>
+                                        <button class="hover:bg-green-100 rounded px-2">
+                                            + follow
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -188,6 +189,8 @@
                 {{ $profile->bio }}
             </p>
         </div>
+
+    </div>
 
     </div>
     <!--end menu profiles-->
@@ -296,7 +299,7 @@
                         class="max-w-full max-h-full mx-auto mt-4">
                 </a>
             @endforeach
-
+ 
         </div>
         <div class="  rounded-lg bg-gray-50 dark:bg-gray-800  grid grid-cols-1 gap-5 p-6 xl:p-2 md:grid-cols-4 mx-auto max-w-screen-xl mb-10"
             id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">

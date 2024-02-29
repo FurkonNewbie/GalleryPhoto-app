@@ -32,8 +32,8 @@ class ReportController extends Controller
 
         // Create the report
         $report = Report::create([
-            'user_id' => auth()->user()->id,      // Get the authenticated user's ID
-            'foto_id' => $foto->id,       // Use the ID of the photo being reported
+            'user_id' => auth()->user()->id,
+            'foto_id' => $foto->id,
             'deskripsi' => $validatedData['deskripsi'],
         ]);
 
@@ -71,6 +71,7 @@ class ReportController extends Controller
 
         // Hapus data komen terkait
         comment::where('foto_id', $id)->delete();
+
 
         // Hapus data foto dari database
         foto::destroy($id);

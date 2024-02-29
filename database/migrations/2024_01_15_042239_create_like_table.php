@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateLikeTable extends Migration
 {
@@ -19,6 +20,26 @@ class CreateLikeTable extends Migration
             $table->unsignedBigInteger('foto_id');
             $table->timestamps();
         });
+        // TRIGGER REKAP INSERT LIKE
+//         DB::unprepared('
+//              CREATE TRIGGER trigger_like_insert
+//              AFTER INSERT ON `like`
+//              FOR EACH ROW
+//              BEGIN
+//                  INSERT INTO log_like (user_id, action, created_at, updated_at)
+//                  VALUES (NEW.id, "INSERT", "", NOW(), NOW());
+//              END;
+//          ');
+//         //TRIGGER REKAP DELETE LIKE
+//         DB::unprepared('
+//        CREATE TRIGGER trigger_like_delete
+//        AFTER DELETE ON `like`
+//        FOR EACH ROW
+//        BEGIN
+//            INSERT INTO log_like (user_id, action,created_at, updated_at)
+//            VALUES (OLD.id, "DELETE", "", NOW(), NOW());
+//        END;
+// ');
     }
 
     /**

@@ -11,10 +11,6 @@
         {{-- <img src="{{ file_exists(public_path('profile/' . $profile->profile)) ? asset('/profile/' . $profile->profile) : asset('assets/users.png') }}"
             class="w-14 h-14 rounded-full" alt="" id="profile"> --}}
         <img src="" class="w-14 h-14 rounded-full" alt="" id="profile">
-
-
-
-
         <div class="flex flex-col">
             <strong class="text-2xl" id="username">saliz</strong>
             <div class="flex gap-4">
@@ -195,11 +191,13 @@
                             </div>
                         </div>
                     </div>
+                    <p class="text-sm mt-3" id="bio">
+                        {{-- {{ $profile->bio }} --}}
+                    </p>
                 </div>
+
             </div>
-            <p class="text-sm mt-3" id="bio">
-                {{-- {{ $profile->bio }} --}}
-            </p>
+
         </div>
         <div id="tombolfollow">
             @csrf
@@ -212,19 +210,6 @@
         </div>
     </div>
     <!--end menu profiles-->
-
-
-    {{-- <div class="mb-4 border-b border-gray-200 dark:border-gray-700 max-w-screen-xl mx-auto">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
-            data-tabs-toggle="#default-tab-content" role="tablist">
-            <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">Upload</button>
-            </li>
-        </ul>
-    </div> --}}
-    <!-- Tambahkan sesuai kebutuhan untuk menampilkan informasi lainnya tentang user -->
-    {{-- <h2 class="ml-96">{{ $userLain->username }}'s Profile</h2> --}}
 
     <div class="mb-4 border-b border-gray-200 dark:border-gray-700 max-w-screen-xl mx-auto">
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
@@ -244,23 +229,6 @@
         </div>
     </div>
 
-
-    {{-- <div class="hidden p-4 rounded-lg columns-1 gap-5 xl:p-2 lg:columns-5 mx-auto max-w-screen-xl mb-10 " id="profile"
-        role="tabpanel" aria-labelledby="profile-tab">
-        <img src="{{ asset('foto/foto1707354209.png') }}" alt="">
-
-        <div class="grid grid-cols-3 gap-4">
-            @foreach ($tampilUpload as $foto)
-                <div class="foto-item">
-                    <img class="w-full h-auto" src="{{ asset('foto/' . $foto->url) }}" alt="Foto {{ $foto->id }}">
-                    <img src="/foto/foto1707701521.jpg" alt="">
-                    <!-- Tampilkan informasi lainnya mengenai foto jika diperlukan -->
-                </div>
-            @endforeach
-        </div>
-
-
-    </div> --}}
 
 
 

@@ -9,7 +9,27 @@ $.ajax({
         $('#fotodetail').prop('src', '/foto/' + res.dataDetailFoto.url)
         $('#profile').prop('src', '/profile/' + res.dataDetailFoto.user.profile)
         $('#username').html(res.dataDetailFoto.user.username)
-        $('#tanggal').html(res.dataDetailFoto.user.created_at)
+        // Pastikan res.dataDetailFoto.user.created_at adalah string tanggal yang valid
+        let createdDate = new Date(res.dataDetailFoto.user.created_at);
+
+        // Mendapatkan jam dan menit dalam format 12 jam dengan AM/PM
+        let hours = createdDate.getHours();
+        let minutes = createdDate.getMinutes();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12; // Mengubah jam 0 menjadi 12
+
+        // Mendapatkan tanggal, bulan, dan tahun
+        let day = createdDate.getDate();
+        let month = createdDate.toLocaleString('default', {
+            month: 'long'
+        }); // Nama bulan dalam bahasa Inggris
+        let year = createdDate.getFullYear();
+
+        // Format tanggal dan waktu
+        let formattedDate = `${day} ${month} ${year}, ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+
+        // Update HTML element dengan tanggal yang diformat
+        $('#tanggal').html(formattedDate);
         $('#deskripsi').html(res.dataDetailFoto.deskripsi)
         ambilKomentar()
         var idUser;

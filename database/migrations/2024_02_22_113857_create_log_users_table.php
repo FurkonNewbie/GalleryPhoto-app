@@ -15,13 +15,13 @@ class CreateLogUsersTable extends Migration
     {
         Schema::create('log_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Menyimpan ID dari user yang terkait
-            $table->string('action'); // Menyimpan informasi tindakan (INSERT, UPDATE, DELETE)
+            $table->unsignedBigInteger('user_id'); 
+            $table->string('action'); // REKAP AKSI INSERT UPDATE dan DELETE
             $table->string('username');
             $table->string('email');
             $table->string('alamat');
             $table->string('no_telepon', 12)->nullable();
-            $table->text('keterangan')->nullable(); // Menyimpan keterangan tambahan jika diperlukan
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

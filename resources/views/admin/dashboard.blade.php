@@ -104,7 +104,7 @@
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Nama</th>
                                 <th class="px-4 py-3">email</th>
-                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">No telp</th>
                                 <th class="px-4 py-3">role</th>
                             </tr>
                         </thead>
@@ -130,8 +130,7 @@
                                         {{ $data->email }}
                                     </td>
                                     <td class="px-4 py-3 text-xs">
-                                        <span
-                                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                        <span class=" py-1 font-semibold leading-tight  rounded-full ">
                                             {{ $data->no_telepon }}
                                         </span>
                                     </td>
@@ -139,17 +138,6 @@
                                         {{ $data->role }}
                                     </td>
                                 </tr>
-
-                                {{-- @foreach ($datapengaduan as $index => $data)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $data->judul_pengaduan }}</td>
-                                    <td>{{ $data->kategori->nama_kategori }}</td>
-                                    <td>{{ $data->status }}</td>
-                                    <td><a href="/detail/{{ $data->id }}" class="btn btn-primary">Detail</a>
-                                    </td>
-                                </tr>
-                            @endforeach --}}
                             @endforeach
 
 

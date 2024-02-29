@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-
+        // TRIGGER REKAP INSERT USER
         DB::unprepared('
         CREATE TRIGGER trigger_user_insert
         AFTER INSERT ON users
@@ -39,31 +39,32 @@ class CreateUsersTable extends Migration
         BEGIN
             DECLARE alamat_value VARCHAR(255);
 
-            -- Set alamat_value ke nilai alamat dari NEW atau kosongkan jika NULL
+            -- Set alamat_value ke nilai alamat dari NEW atau KOSONGIN jika NULL
             SET alamat_value = COALESCE(NEW.alamat, "");
 
             INSERT INTO log_users (user_id, action, username, email, alamat, no_telepon, keterangan, created_at, updated_at)
             VALUES (NEW.id, "INSERT", NEW.username, NEW.email, alamat_value, NEW.no_telepon, "", NOW(), NOW());
         END;
     ');
+        //TRIGGER REKAP UPDATE USER
         DB::unprepared('
-    CREATE TRIGGER trigger_user_update
-    AFTER UPDATE ON users
-    FOR EACH ROW
-    BEGIN
-        INSERT INTO log_users (user_id, action, username, email, alamat, no_telepon, keterangan, created_at, updated_at)
-        VALUES (NEW.id, "UPDATE", NEW.username, NEW.email, NEW.alamat, NEW.no_telepon, "", NOW(), NOW());
-    END;
+        CREATE TRIGGER trigger_user_update
+        AFTER UPDATE ON users
+        FOR EACH ROW
+        BEGIN
+            INSERT INTO log_users (user_id, action, username, email, alamat, no_telepon, keterangan, created_at, updated_at)
+            VALUES (NEW.id, "UPDATE", NEW.username, NEW.email, NEW.alamat, NEW.no_telepon, "", NOW(), NOW());
+        END;
 ');
-
+        //TRIGGER REKAP DELETE USER
         DB::unprepared('
-    CREATE TRIGGER trigger_user_delete
-    AFTER DELETE ON users
-    FOR EACH ROW
-    BEGIN
-        INSERT INTO log_users (user_id, action, username, email, alamat, no_telepon, keterangan, created_at, updated_at)
-        VALUES (OLD.id, "DELETE", OLD.username, OLD.email, OLD.alamat, OLD.no_telepon, "", NOW(), NOW());
-    END;
+        CREATE TRIGGER trigger_user_delete
+        AFTER DELETE ON users
+        FOR EACH ROW
+        BEGIN
+            INSERT INTO log_users (user_id, action, username, email, alamat, no_telepon, keterangan, created_at, updated_at)
+            VALUES (OLD.id, "DELETE", OLD.username, OLD.email, OLD.alamat, OLD.no_telepon, "", NOW(), NOW());
+        END;
 ');
     }
 

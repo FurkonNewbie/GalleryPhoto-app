@@ -11,42 +11,11 @@
         <div class="bg-white   shadow-xl rounded-lg w-full h-auto lg:w-[550px] ">
             <div class="flex justify-end mr-2 my-1">
 
-                <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal"
-                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    type="button">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                        viewBox="0 0 16 3">
-                        <path
-                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                    </svg>
-                </button>
 
-                <!-- Dropdown menu -->
-                <div id="dropdownDotsHorizontal"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconHorizontalButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                        </li>
-                    </ul>
-                    <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated
-                            link</a>
-                    </div>
-                </div>
+
+
             </div>
-            <hr class="mx-auto w-11/12 border-t border-gray-300">
+
 
             <div class="flex pr-4 pl-4 pt-2 justify-between">
                 <div class="flex">
@@ -71,13 +40,12 @@
                 <img src="" alt="" class="w-80 rounded-md" id="fotodetail">
             </div>
             <hr class="mx-auto w-11/12 border-t border-gray-300">
-
         </div>
         <div class="w-full lg:w-[450px] h-96 bg-white shadow-xl rounded-xl  px-4 mb-5">
             <div class="p-4 text-xl ">komen</div>
+            <hr class="mx-auto w-11/12 border-t border-gray-300">
             <div class="relative flex flex-col p-2 justify-between overflow-auto  h-[250px]  scrollbar-hidden"
                 id="listkomentar">
-
                 {{--
                 <div class="flex mb-3">
                     <img src="/assets/users.png" class="w-10 h-10" alt="" />
