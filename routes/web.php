@@ -150,6 +150,8 @@ Route::middleware('admin')->group(function () {
 
     //hapus akun user
     Route::delete('hapus_account/{id}', [AdminController::class, 'hapus_account'])->name('hapus_account');
+    //edit akun
+    Route::put('/users/{id}/update', [AdminController::class, 'update'])->name('user.update');
 
 
     //logout admin

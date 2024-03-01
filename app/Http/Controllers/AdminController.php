@@ -17,8 +17,9 @@ class AdminController extends Controller
         $jumlahDataUploadUser = count($dataUser);
         $userCount = User::where('role', 'user')->count();
         $albumKategori = album::all()->count();
+        $jumlahReport = report::all()->count();
 
-        return view('admin.dashboard', compact('dataUser', 'userCount', 'albumKategori', 'jumlahDataUploadUser'));
+        return view('admin.dashboard', compact('dataUser', 'userCount', 'albumKategori', 'jumlahDataUploadUser', 'jumlahReport'));
     }
 
     public function hapus_report()
@@ -33,7 +34,9 @@ class AdminController extends Controller
     public function hapus_akun()
     {
         $user = User::where('role', 'user')->get();
-        return view('admin.hapus_akun', compact('user'));
+        $firstUser = $user->first(); // Mengambil pengguna pertama dari koleksi
+
+        return view('admin.hapus_akun', compact('user', 'firstUser'));
     }
     //fungsi hapus akun
     public function hapus_account(Request $request, $id)
@@ -72,5 +75,21 @@ class AdminController extends Controller
         $user->delete();
 
         return redirect('/hapus_akun')->with('success', 'Hapus akun berhasil');
+    }
+    //update user
+    public function update(Request $request, $id)
+    {
+        // Lakukan validasi atau operasi penyimpanan data di sini
+        // Contoh:
+        $user = User::find($id);
+        $user->update([
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'no_telepon' => $request->input('no_telepon'),
+            'alamat' => $request->input('alamat'),
+            'bio' => $request->input('bio'),
+        ]);
+
+        return redirect()->route('hapus_akun')->with('success', 'User berhasil diupdate');
     }
 }
