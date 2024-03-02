@@ -16,7 +16,7 @@ class CreateReportTable extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('foto_id');
+            $table->unsignedBigInteger('foto_id')->nullable()->change(); //tambahan 
             $table->string('deskripsi');
             $table->enum('status', ['aktif', 'nonaktif',])->default('aktif');
             $table->timestamps();

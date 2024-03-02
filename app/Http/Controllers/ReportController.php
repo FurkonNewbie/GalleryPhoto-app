@@ -40,6 +40,7 @@ class ReportController extends Controller
         return redirect()->back()->with('success', 'Laporan berhasil disimpan.');
     }
 
+    //menga,bil halaman report dan berdasarkan id foto user
     public function report_foto($id)
     {
         $foto = foto::find($id);
@@ -51,30 +52,63 @@ class ReportController extends Controller
 
         return view('user.report', compact('foto'));
     }
+
+
     //hapus id report
+    // public function destroy($id)
+    // {
+
+    //     $report = report::findOrFail($id);
+    //     // Periksa apakah data laporan ditemukan
+    //     if (!$report) {
+    //         return redirect()->back()->with('error', 'Data laporan tidak ditemukan.');
+    //     }
+    //     // Hapus data foto dari penyimpanan (jika diperlukan)
+    //     Storage::delete('/foto/' . $report->foto->lokasi_file);
+
+    //     $report->delete();
+
+
+    //     // Hapus data like terkait
+    //     like::where('foto_id', $id)->delete();
+
+    //     // Hapus data komen terkait
+    //     comment::where('foto_id', $id)->delete();
+
+
+    //     // Hapus data foto dari database
+    //     foto::destroy($id);
+    //     return redirect('/hapus_akun')->with('success', 'Report berhasil dihapus.');
+    // }
+
     public function destroy($id)
     {
+        try {
+            $report = Report::find($id);
 
-        $report = report::findOrFail($id);
-        // Periksa apakah data laporan ditemukan
-        if (!$report) {
-            return redirect()->back()->with('error', 'Data laporan tidak ditemukan.');
+            // Periksa apakah data report ditemukan
+            if (!$report) {
+                return redirect('/hapus_akun')->with('error', 'Data laporan tidak ditemukan.');
+            }
+
+            // Hapus data foto terlebih dahulu (jika ada)
+            if ($report->foto) {
+                Storage::delete('/foto/' . $report->foto->lokasi_file);
+                foto::destroy($report->foto->id);
+            }
+
+            // Hapus data like terkait
+            like::where('foto_id', $report->foto_id)->delete();
+
+            // Hapus data komen terkait
+            comment::where('foto_id', $report->foto_id)->delete();
+
+            // Hapus data laporan
+            $report->delete();
+
+            return redirect('/hapus_akun')->with('success', 'Report berhasil dihapus beserta relasinya.');
+        } catch (\Exception $e) {
+            return redirect('/hapus_akun')->with('error', 'Gagal menghapus report dan relasinya: ' . $e->getMessage());
         }
-        // Hapus data foto dari penyimpanan (jika diperlukan)
-        Storage::delete('/foto/' . $report->foto->lokasi_file);
-
-        $report->delete();
-
-
-        // Hapus data like terkait
-        like::where('foto_id', $id)->delete();
-
-        // Hapus data komen terkait
-        comment::where('foto_id', $id)->delete();
-
-
-        // Hapus data foto dari database
-        foto::destroy($id);
-        return redirect('/hapus_akun')->with('success', 'Report berhasil dihapus.');
     }
 }

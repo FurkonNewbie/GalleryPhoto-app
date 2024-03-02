@@ -56,14 +56,15 @@ Route::middleware('guest')->group(function () {
 Route::middleware('user')->group(function () {
     //comment
     Route::get('/comment/{id}', [CommentController::class, 'comment'])->name('comment');
-
     Route::get('/comment/{id}/getdatadetail', [CommentController::class, 'getdatadetail'])->name('getdatadetail');
     Route::get('/comment/getComment/{id}', [CommentController::class, 'ambildatakomentar'])->name('ambildatakomentar');
     //kirim komentar
     Route::post('/comment/kirimkomentar', [CommentController::class, 'kirimkomentar'])->name('kirimkomentar');
+
+
+
     //follow
     Route::post('/comment/ikuti', [CommentController::class, 'ikuti'])->name('ikuti');
-
 
 
 
@@ -73,19 +74,26 @@ Route::middleware('user')->group(function () {
     Route::post('/like', [UserController::class, 'like'])->name('like');
     //endjavascript
 
+
+
     //profile user
     Route::get('/profil', [ProfileController::class, 'profil'])->name('profil');
     Route::get('/profil/getDataProfil', [ProfileController::class, 'profil'])->name('profil');
+
+
 
     //menampilkan profile user lain
     Route::get('/profil_other/{id}', [ProfileController::class, 'profil_other'])->name('profil_other');
     Route::get('/profil_other/getDataProfil/{id}', [ProfileController::class, 'getDataProfil'])->name('getDataProfil');
     Route::get('/getdataprofilother/', [ProfileController::class, 'getdataprofilother']);
 
+
+
     //album
     Route::get('/album/{id}', [ProfileController::class, 'show'])->name('album.show');
 
-    Route::post('/up_fotoprofile', [ProfileController::class, 'up_fotoprofile'])->name('up_fotoprofile');
+    //proses edit profile
+    // Route::post('/up_fotoprofile', [ProfileController::class, 'up_fotoprofile'])->name('up_fotoprofile');
 
     //profile
     Route::get('/edit_profile', [ProfileController::class, 'edit_profile'])->name('edit_profile');
@@ -100,11 +108,8 @@ Route::middleware('user')->group(function () {
 
     //upload and album
     Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
-
-
     // Display the edit form
     Route::get('/edit_upload/{foto}/edit', [UploadController::class, 'edit_upload'])->name('edit_upload.edit');
-
     // Handle the form submission to update the photo
     Route::put('/edit_upload/{foto}', [UploadController::class, 'updateFoto'])->name('edit_upload.update');
 
@@ -112,10 +117,9 @@ Route::middleware('user')->group(function () {
 
     // Define the route for displaying uploaded photos
     Route::get('/uploaded', [UploadController::class, 'uploaded'])->name('uploaded');
-
-
     //delete foto
     Route::delete('/photos/{foto}', [UploadController::class, 'destroyFoto'])->name('photos.destroy');
+
 
 
     //proses upload foto
@@ -125,7 +129,8 @@ Route::middleware('user')->group(function () {
     //end upload and album
 
 
-    //report
+
+    //report user
     Route::post('/report/{id}', [ReportController::class, 'report'])->name('report');
     Route::get('/report_foto/{id}', [ReportController::class, 'report_foto'])->name('report_foto');
 
