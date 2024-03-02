@@ -45,6 +45,6 @@ class foto extends Model
 
     public function report()
     {
-        return $this->hasOne(Report::class, 'foto_id', 'id');
+        return $this->hasMany(Report::class, 'foto_id', 'id');
     }
 }

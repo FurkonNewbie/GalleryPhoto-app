@@ -84,9 +84,7 @@
                                             </form>
                                         </div>
                                     </td>
-                                </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -258,6 +256,8 @@
             </form>
         </div>
     </div>
+    </tr>
+
     <script>
         function openModal(modalId) {
             // Dapatkan modal berdasarkan ID

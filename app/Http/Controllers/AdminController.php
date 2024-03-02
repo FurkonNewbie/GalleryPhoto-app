@@ -34,48 +34,59 @@ class AdminController extends Controller
     public function hapus_akun()
     {
         $user = User::where('role', 'user')->get();
-        $firstUser = $user->first(); // Mengambil pengguna pertama dari koleksi
+        $firstUser = $user->first();
 
         return view('admin.hapus_akun', compact('user', 'firstUser'));
     }
+
     //fungsi hapus akun
     public function hapus_account(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        try {
+            // Temukan pengguna
+            $user = User::findOrFail($id);
 
-        // Hapus rekaman terkait dari tabel report
-        $user->report()->delete();
+            // Hapus rekaman terkait di tabel follow
+            $user->follow()->delete();
 
-        // Hapus rekaman terkait dari tabel album dan foto
-        foreach ($user->album as $album) {
-            foreach ($album->foto as $foto) {
-                // Hapus rekaman di tabel report yang terkait dengan foto
-                $foto->report()->delete();
+            // Hapus rekaman terkait di tabel report
+            $user->report()->delete();
 
-                // Hapus rekaman di tabel comment yang terkait dengan foto
-                $foto->comment()->delete();
+            // Hapus rekaman terkait di tabel album dan foto
+            foreach ($user->album as $album) {
+                foreach ($album->foto as $foto) {
+                    // Hapus rekaman terkait di tabel report, comment, dan like
+                    $foto->report()->delete();
+                    $foto->comment()->delete();
+                    $foto->like()->delete();
 
-                // Hapus rekaman di tabel like yang terkait dengan foto
-                $foto->like()->delete();
+                    // Hapus rekaman di tabel foto
+                    $foto->delete();
+                }
 
-                // Hapus rekaman di tabel foto
-                $foto->delete();
+                // Hapus rekaman di tabel album
+                $album->delete();
             }
-            $album->delete();
+
+            // Hapus rekaman terkait di tabel like dan comment
+            $user->like()->delete();
+            $user->comment()->delete();
+
+            // Hapus rekaman terkait di tabel foto (jika ada yang tersisa)
+            $user->foto()->each(function ($foto) {
+                $foto->report()->delete();
+                $foto->delete();
+            });
+
+            // Hapus rekaman pengguna
+            $user->delete();
+
+            return redirect('/hapus_akun')->with('success', 'Hapus akun berhasil');
+        } catch (\Exception $e) {
+            return redirect('/hapus_akun')->with('error', 'Gagal menghapus akun');
         }
-
-        // Hapus rekaman terkait dari tabel like dan comment
-        $user->like()->delete();
-        $user->comment()->delete();
-
-        // Hapus rekaman terkait dari tabel foto
-        $user->foto()->delete();
-
-        // Hapus pengguna
-        $user->delete();
-
-        return redirect('/hapus_akun')->with('success', 'Hapus akun berhasil');
     }
+
     //update user
     public function update(Request $request, $id)
     {
