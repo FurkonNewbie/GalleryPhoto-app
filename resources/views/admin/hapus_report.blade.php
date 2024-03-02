@@ -48,8 +48,7 @@
                                         {{ $data->user->username }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        <form action="{{ route('report.destroy', ['id' => $data->foto_id]) }}"
-                                            method="POST">
+                                        <form action="{{ route('report.destroy', ['id' => $data->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

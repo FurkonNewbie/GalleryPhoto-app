@@ -33,6 +33,11 @@
                         <td class="px-6 py-4">
                             <div class="flex ">
                                 <div class="mx-2">
+                                    <a href="">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </div>
+                                <div class="mx-2">
                                     <a href="{{ route('edit_upload.edit', $foto) }}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
