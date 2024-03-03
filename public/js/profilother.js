@@ -19,6 +19,7 @@ $.getJSON(window.location.origin + '/profil_other/getDataProfil/' + segmentTerak
     }
 });
 
+
 function ikuti(txt, id) {
     $.ajax({
         url: window.location.origin + '/comment/ikuti',

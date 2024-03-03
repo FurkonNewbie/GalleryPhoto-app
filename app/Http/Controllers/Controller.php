@@ -11,6 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    //menampilkan halaman utama atau landing page
     public function homepage()
     {
         return view('homepage');

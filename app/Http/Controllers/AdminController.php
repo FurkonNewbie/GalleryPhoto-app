@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    //menampilkan halaman dashboard admin
     public function dashboard()
 
     {
@@ -22,15 +23,18 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('dataUser', 'userCount', 'albumKategori', 'jumlahDataUploadUser', 'jumlahReport'));
     }
 
+    //menampilkan halaman report
     public function hapus_report()
     {
         $report = report::with('user', 'foto')->get();
         return view('admin.hapus_report', compact('report'));
     }
+    //menampilkan halaman profile admin
     public function profile_admin()
     {
         return view('admin.profile_admin');
     }
+    //menampilkan halaman hapus akun user
     public function hapus_akun()
     {
         $user = User::where('role', 'user')->get();
@@ -87,7 +91,7 @@ class AdminController extends Controller
         }
     }
 
-    //update user
+    //fungsi update user
     public function update(Request $request, $id)
     {
         // Lakukan validasi atau operasi penyimpanan data di sini

@@ -9,7 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
-
+    //fungsi pengecekan user sedang register
     public function cek_register(Request $request)
     {
         $alert = [
@@ -47,7 +47,7 @@ class RegisterController extends Controller
     }
 
 
-
+    //menampilkan halaman register
     public function register()
     {
         return view('register');

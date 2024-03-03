@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class ReportController extends Controller
 {
 
+    //user membuat report
     public function report(Request $request, $id)
     {
         // Find the photo by ID
@@ -85,6 +86,8 @@ class ReportController extends Controller
     //         return redirect('/hapus_akun')->with('error', 'Gagal menghapus report dan relasinya: ' . $e->getMessage());
     //     }
     // }
+
+    //fungsi untuk menghapus report oleh admin
     public function destroy($id)
     {
         try {
@@ -115,9 +118,9 @@ class ReportController extends Controller
                 foto::destroy($report->foto->id);
             }
 
-            return redirect('/hapus_akun')->with('success', 'Report berhasil dihapus beserta relasinya.');
+            return redirect('/hapus_report')->with('success', 'Report berhasil dihapus beserta relasinya.');
         } catch (\Exception $e) {
-            return redirect('/hapus_akun')->with('error', 'Gagal menghapus report dan relasinya: ' . $e->getMessage());
+            return redirect('/hapus_report')->with('error', 'Gagal menghapus report dan relasinya: ' . $e->getMessage());
         }
     }
 }

@@ -10,12 +10,14 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    //menampilkan halaman komentar
     public function comment($id)
     {
 
         return view('user.comment');
     }
 
+    //menampilkan data data di komentar berdasarkan id
     public function getdatadetail(Request $request, $id)
     {
         $dataDetailFoto = foto::with('user')->where('id', $id)->firstOrFail();
@@ -29,6 +31,7 @@ class CommentController extends Controller
         ], 200);
     }
 
+    //proses menampilkan data komentar
     public function ambildatakomentar(Request $request, $id)
     {
         $ambilkomentar = comment::with('user')->where('foto_id', $id)->get();
@@ -37,6 +40,7 @@ class CommentController extends Controller
         ], 200);
     }
 
+    //proses kirim komentar
     public function kirimkomentar(Request $request)
     {
         try {
@@ -59,6 +63,7 @@ class CommentController extends Controller
         }
     }
 
+    //proses following
     public function ikuti(Request $request)
     {
         try {
@@ -83,4 +88,4 @@ class CommentController extends Controller
     }
 }
 
-//siwniws
+

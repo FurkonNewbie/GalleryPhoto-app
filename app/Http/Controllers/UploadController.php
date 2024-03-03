@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class UploadController extends Controller
 {
+    //menampilkan halaman upload
     public function upload()
     {
         $albums = album::all();
         return view('user.upload', compact('albums'));
     }
 
+    //fungsi untuk membuat postingan/ uploading
     public function save(Request $request)
     {
         // Validasi tipe mime file
@@ -45,6 +47,7 @@ class UploadController extends Controller
     }
 
 
+    //fungsi untuk membuat album baru
     public function album(Request $request)
     {
         if ($request->album_id == 0) {
@@ -62,20 +65,21 @@ class UploadController extends Controller
 
         return redirect('/upload')->with('success', 'Berhasil menambahkan album.');
     }
+
+    //nemampilkan halaman uploaded atau halaman yang sudah di upload oleh user
     public function uploaded()
     {
         $datafoto = foto::with(['user', 'album'])->where('user_id', auth()->user()->id)->get();
         return view('user.uploaded', compact('datafoto'));
     }
+
+    //fungsi untuk menghapus foto postingan user
     public function destroyFoto(Request $request, foto $foto)
     {
 
         if ($foto->user_id != auth()->user()->id) {
             return back()->with('error', 'Tidak diizinkan menghapus foto ini.');
         }
-
-
-
         // Lakukan penghapusan
         try {
             // Mulai transaksi database
@@ -101,12 +105,15 @@ class UploadController extends Controller
         }
     }
 
+    //menampilkan halaman edit postingan
     public function edit_upload($id)
     {
         $albums = album::all();
         $foto = foto::where('id', $id)->first(); // Replace 1 with the actual ID or logic to find the appropriate foto
         return view('user.edit_upload', compact('foto', 'albums'));
     }
+
+    //fungsi update postingan
     public function updateFoto(Request $request, foto $foto)
     {
         // Validation logic if needed

@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
 
-
-
+    //menampilkan halaman index
     public function index()
     {
         $profile = User::where('id', auth()->user()->id)->first();
@@ -33,6 +32,7 @@ class UserController extends Controller
         }
     }
 
+    //menampilkan data looping di halaman index
     public function getdata(Request $request)
     {
         $index = foto::with(['like', 'user'])->orderBy('id', 'DESC')->withCount(['like', 'comment'])->paginate();
@@ -43,6 +43,7 @@ class UserController extends Controller
             'userId'     => auth()->user()->id
         ]);
     }
+    
     //fungsi tombol like
     public function like(Request $request)
     {

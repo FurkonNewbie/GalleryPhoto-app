@@ -9,6 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LogoutController extends Controller
 {
+    //proses logout user
     public function __invoke(Request $request)
     {
         Alert::success('success', 'Logout berhasil!');

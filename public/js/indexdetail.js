@@ -9,24 +9,22 @@ $.ajax({
         $('#fotodetail').prop('src', '/foto/' + res.dataDetailFoto.url)
         $('#profile').prop('src', '/profile/' + res.dataDetailFoto.user.profile)
         $('#username').html(res.dataDetailFoto.user.username)
-        // Pastikan res.dataDetailFoto.user.created_at adalah string tanggal yang valid
-        let createdDate = new Date(res.dataDetailFoto.user.created_at);
+        $('#username').prop('href', '/profil_other/' + res.dataDetailFoto.user.id)
+        let createdDateUTC = new Date(res.dataDetailFoto.user.created_at);
+        let offset = new Date().getTimezoneOffset();
+        let createdDateLocal = new Date(createdDateUTC.getTime() - (offset * 60 * 1000));
 
-        // Mendapatkan jam dan menit dalam format 12 jam dengan AM/PM
-        let hours = createdDate.getHours();
-        let minutes = createdDate.getMinutes();
+        let hours = createdDateLocal.getHours();
+        let minutes = createdDateLocal.getMinutes();
         let ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12; // Mengubah jam 0 menjadi 12
+        hours = hours % 12 || 12;
 
-        // Mendapatkan tanggal, bulan, dan tahun
-        let day = createdDate.getDate();
-        let month = createdDate.toLocaleString('default', {
-            month: 'long'
-        }); // Nama bulan dalam bahasa Inggris
-        let year = createdDate.getFullYear();
+        let formattedDate = `${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}, ${createdDateLocal.getDate()} ${getMonthName(createdDateLocal.getMonth())} ${createdDateLocal.getFullYear()}`;
 
-        // Format tanggal dan waktu
-        let formattedDate = `${day} ${month} ${year}, ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+        function getMonthName(monthIndex) {
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            return monthNames[monthIndex];
+        }
 
         // Update HTML element dengan tanggal yang diformat
         $('#tanggal').html(formattedDate);
@@ -67,6 +65,7 @@ function ambilKomentar() {
                 let formattedDate = `${createdDate.getHours()}:${createdDate.getMinutes()}, ${createdDate.getDate()} ${getMonthName(createdDate.getMonth())}, ${createdDate.getFullYear()}`;
                 let datacomentar = {
                     idUser: x.user.id,
+                    user_id: x.user_id,
                     pengirim: x.user.username,
                     waktu: formattedDate,
                     isikomentar: x.isi_komentar,
@@ -83,9 +82,11 @@ const tampilkankomentar = () => {
     $('#listkomentar').html('')
     comment.map((x, i) => {
         $('#listkomentar').append(`    <div class="flex mb-3">
+        <a href="/profil_other/${x.user_id}">
         <img src="/profile/${x.fotopengirim}" class="w-10 h-10" alt="" />
         <div class="flex flex-col">
             <h3 class="text-md mx-2">${x.pengirim}</h3>
+            </a>
             <h5 class="text-xs mx-2">
                 ${x.isikomentar}
             </h5>

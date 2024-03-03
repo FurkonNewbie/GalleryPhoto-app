@@ -11,6 +11,7 @@ class LogoutAdminController extends Controller
 {
     public function __invoke(Request $request)
     {
+        //proses logout admin
         Alert::success('success', 'Logout berhasil!');
         Auth::logout();
         return redirect(RouteServiceProvider::HOME);

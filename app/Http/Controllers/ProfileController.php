@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
+    //fungsi untuk menampilkan halaman profile user
     public function profil()
     {
 
@@ -31,7 +32,7 @@ class ProfileController extends Controller
         return view('user.profile', compact('profile', 'tampilUpload', 'tampilAlbum', 'userFollowers', 'dataFollowCount'));
     }
 
-
+    //fungsi untuk menampilkan halaman profile user lain
     public function profil_other(Request $request, $id)
     {
         $profile = foto::with('user')->where('user_id', $id)->whereHas('user', function ($query) {
@@ -46,19 +47,22 @@ class ProfileController extends Controller
             return abort(404); // You can customize this to your needs
         }
     }
+
+    //fungsi untuk menampilkan gambar di dalam album
     public function show($id)
     {
         $album = album::with('foto')->findOrFail($id);
         return view('user.album', compact('album'));
     }
 
+    //fungsi untuk menampilkan halaman edit profile user
     public function edit_profile()
     {
         $profile = User::where('id', auth()->user()->id)->first();
         return view('user.edit_profile', compact('profile'));
     }
 
-
+    //fungsi untuk mengubah data profile user
     public function up_profile(Request $request)
     {
         // Validation rules
@@ -106,11 +110,9 @@ class ProfileController extends Controller
         return redirect('/profil')->with('success', 'Profil berhasil diperbarui');
     }
 
-    // public function up_fotoprofile(Request $request) {
-
-    // }
 
 
+    //fungsi untuk mengubah password user
     public function up_password(Request $request)
     {
         $user = User::find(auth()->user()->id);
@@ -130,6 +132,7 @@ class ProfileController extends Controller
     }
 
 
+    //fungsi untuk menampilkan jumlah followers dan following
     public function getDataProfil(Request $request, $id)
     {
         $dataUser = User::where('id', $id)->first();
@@ -158,7 +161,7 @@ class ProfileController extends Controller
         ], 200);
     }
 
-
+    //enampilkan jumlah postingan user lain
     public function getdataprofilother(Request $request)
     {
         // $dataUser               = User::where('id', $id)->firstOrFail();
@@ -173,6 +176,8 @@ class ProfileController extends Controller
             'userId'                   => auth()->user()->id
         ]);
     }
+
+    //menampilkan jumlah followers dan following untuk user sedang login
     public function getProfil(Request $request, $id)
     {
         // Jika $id sama dengan ID pengguna yang sedang masuk (profil sendiri)

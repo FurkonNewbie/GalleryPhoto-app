@@ -21,7 +21,7 @@
                 <div class="flex">
                     <img src="" class="w-8 h-8" alt="" id="profile">
                     <div class="flex flex-col ml-2">
-                        <h3 class="text-sm" id="username">Fukorn</h3>
+                        <a href="" class="text-sm" id="username">Fukorn</a>
                         <h6 class="text-xs" id="tanggal">12.00pm</h6>
                     </div>
                 </div>

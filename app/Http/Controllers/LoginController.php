@@ -10,7 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
-
+    //proses pengecekan email dan password saat login
     public function cek_log(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -27,6 +27,7 @@ class LoginController extends Controller
             return redirect('login');
         }
     }
+    //menampilkan halaman login
     public function login()
     {
         return view('login');
