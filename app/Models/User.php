@@ -76,10 +76,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(album::class, 'user_id', 'id');
     }
-    public function follow()
+    public function following()
     {
         return $this->hasMany(follow::class, 'user_id', 'id');
-        return $this->belongsTo(follow::class, 'id', 'id');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(follow::class, 'follow_id', 'id');
     }
 
     public function report()

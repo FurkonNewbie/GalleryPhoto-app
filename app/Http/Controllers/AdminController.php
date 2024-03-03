@@ -44,28 +44,75 @@ class AdminController extends Controller
     }
 
     //fungsi hapus akun
+    // public function hapus_account(Request $request, $id)
+    // {
+    //     try {
+    //         // Temukan pengguna
+    //         $user = User::findOrFail($id);
+
+    //         // Hapus rekaman terkait di tabel follow
+    //         $user->follow()->delete();
+
+    //         // Hapus rekaman terkait di tabel report
+    //         $user->report()->delete();
+
+    //         // Hapus rekaman terkait di tabel album dan foto
+    //         foreach ($user->album as $album) {
+    //             foreach ($album->foto as $foto) {
+    //                 // Hapus rekaman terkait di tabel report, comment, dan like
+    //                 $foto->report()->delete();
+    //                 $foto->comment()->delete();
+    //                 $foto->like()->delete();
+
+    //                 // Hapus rekaman di tabel foto
+    //                 $foto->delete();
+    //             }
+
+    //             // Hapus rekaman di tabel album
+    //             $album->delete();
+    //         }
+
+    //         // Hapus rekaman terkait di tabel like dan comment
+    //         $user->like()->delete();
+    //         $user->comment()->delete();
+
+    //         // Hapus rekaman terkait di tabel foto (jika ada yang tersisa)
+    //         $user->foto()->each(function ($foto) {
+    //             $foto->report()->delete();
+    //             $foto->delete();
+    //         });
+
+    //         // Hapus rekaman pengguna
+    //         $user->delete();
+
+    //         return redirect('/hapus_akun')->with('success', 'Hapus akun berhasil');
+    //     } catch (\Exception $e) {
+    //         return redirect('/hapus_akun')->with('error', 'Gagal menghapus akun');
+    //     }
+    // }
     public function hapus_account(Request $request, $id)
     {
         try {
             // Temukan pengguna
             $user = User::findOrFail($id);
 
-            // Hapus rekaman terkait di tabel follow
-            $user->follow()->delete();
+            // Hapus rekaman terkait di tabel follow (both following and followers)
+            $user->following()->delete();
+            $user->followers()->delete();
 
             // Hapus rekaman terkait di tabel report
             $user->report()->delete();
 
             // Hapus rekaman terkait di tabel album dan foto
             foreach ($user->album as $album) {
-                foreach ($album->foto as $foto) {
+                foreach ($album->foto as $photo) {
                     // Hapus rekaman terkait di tabel report, comment, dan like
-                    $foto->report()->delete();
-                    $foto->comment()->delete();
-                    $foto->like()->delete();
+                    $photo->report()->delete();
+                    $photo->comment()->delete();
+                    $photo->like()->delete();
 
                     // Hapus rekaman di tabel foto
-                    $foto->delete();
+                    $photo->delete();
                 }
 
                 // Hapus rekaman di tabel album
@@ -77,9 +124,9 @@ class AdminController extends Controller
             $user->comment()->delete();
 
             // Hapus rekaman terkait di tabel foto (jika ada yang tersisa)
-            $user->foto()->each(function ($foto) {
-                $foto->report()->delete();
-                $foto->delete();
+            $user->foto()->each(function ($photo) {
+                $photo->report()->delete();
+                $photo->delete();
             });
 
             // Hapus rekaman pengguna

@@ -20,6 +20,10 @@ class follow extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-        return $this->hasMany(User::class, 'follow_id', 'id');
+    }
+
+    public function follower()
+    {
+        return $this->belongsTo(User::class, 'follow_id', 'id');
     }
 }

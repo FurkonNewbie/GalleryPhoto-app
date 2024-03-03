@@ -1,4 +1,3 @@
-
 // Initialize variables
 var paginate = 1;
 var dataIndex = [];
@@ -101,9 +100,7 @@ const getIndex = () => {
                             <h6 class="text-xs">${x.tanggal}</h6>
                         </div>
                     </div>
-                    <div id="tombolfollow">
-                        <button class="hover:bg-green-100 rounded-sm px-2">+ follow</button>
-                    </div>
+
                 </div>
                 <div class="text-xs px-4 pt-2 mb-2">${x.deskripsi}</div>
                 <div class="overflow-hidden flex justify-center mb-2">
@@ -190,9 +187,7 @@ const handleSearch = () => {
                             <h6 class="text-xs">${x.tanggal}</h6>
                         </div>
                     </div>
-                    <div id="tombolfollow">
-                        <button class="hover:bg-green-100 rounded-sm px-2">+ follow</button>
-                    </div>
+
                 </div>
                 <div class="text-xs px-4 pt-2 mb-2">${x.deskripsi}</div>
                 <div class="overflow-hidden flex justify-center mb-2">
