@@ -33,20 +33,41 @@ class ProfileController extends Controller
     }
 
     //fungsi untuk menampilkan halaman profile user lain
+    // public function profil_other(Request $request, $id)
+    // {
+    //     $profile = foto::with('user')->where('user_id', $id)->whereHas('user', function ($query) {
+    //         $query->where('role', 'user');
+    //     })->first();
+
+    //     // Check if the profile exists and the role is 'user'
+    //     if ($profile) {
+    //         return view('user.profile_other', compact('profile'));
+    //     } else {
+    //         // Handle the case where the profile doesn't exist or the role is not 'user'
+    //         return abort(404); // You can customize this to your needs
+    //     }
+    // }
     public function profil_other(Request $request, $id)
     {
-        $profile = foto::with('user')->where('user_id', $id)->whereHas('user', function ($query) {
-            $query->where('role', 'user');
-        })->first();
+        // Mengaktifkan log query
+        DB::enableQueryLog();
 
-        // Check if the profile exists and the role is 'user'
-        if ($profile) {
+        // Mengambil profil dengan relasi user
+        $profile = Foto::with('user')->where('user_id', $id)->first();
+
+        // Menampilkan log query untuk debugging
+        // dd(DB::getQueryLog());
+
+        // Menampilkan halaman profil_other dengan data foto dan user
+        if ($profile && $profile->user && $profile->user->role == 'user') {
             return view('user.profile_other', compact('profile'));
         } else {
             // Handle the case where the profile doesn't exist or the role is not 'user'
-            return abort(404); // You can customize this to your needs
+            return abort(404);
         }
     }
+
+
 
     //fungsi untuk menampilkan gambar di dalam album
     public function show($id)
